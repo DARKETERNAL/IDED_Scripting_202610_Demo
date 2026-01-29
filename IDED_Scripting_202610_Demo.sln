@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36915.13 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDED_Scripting_202610_Demo", "IDED_Scripting_202610_Demo.csproj", "{B9F305BC-B0B3-4536-AB8B-0A463F5FA4C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9F305BC-B0B3-4536-AB8B-0A463F5FA4C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9F305BC-B0B3-4536-AB8B-0A463F5FA4C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9F305BC-B0B3-4536-AB8B-0A463F5FA4C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9F305BC-B0B3-4536-AB8B-0A463F5FA4C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {29FC97F8-F88C-4E7D-B0E2-251440411273}
+	EndGlobalSection
+EndGlobal
