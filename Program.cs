@@ -1,5 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+Console.WriteLine("Holaaaaaaaa, como tas!");
+
+
 
 static string SegundosAHora(int totalSegundos)
 {
@@ -11,5 +13,6 @@ static string SegundosAHora(int totalSegundos)
 }
 
 int segundos = 3661;
+segundos = segundos;
 string tiempoFormateado = SegundosAHora(segundos);
 Console.WriteLine($"Tiempo formateado: {tiempoFormateado}");
