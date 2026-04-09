@@ -25,7 +25,7 @@ public class Target : MonoBehaviour
 
         if (collidedObjectLayer.Equals(Utils.BulletLayer))
         {
-            Destroy(collision.gameObject);
+            Pool.Instance.ReturnBullet(collision.gameObject.GetComponent<Bullet>());
 
             currentHP -= 1;
 
