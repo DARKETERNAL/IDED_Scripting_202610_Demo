@@ -11,17 +11,26 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
-        Invoke("ReturnToPool", 5F);
     }
 
     public void ResetBullet(bool active = false)
     {
+        if (active)
+        {
+            Invoke("ReturnToPool", 5F);
+        }
+        else
+        {
+            CancelInvoke("ReturnToPool");
+        }
+
         rigidbody.linearVelocity = Vector3.zero;
         gameObject.SetActive(active);
     }
 
     private void ReturnToPool()
     {
+        print("Returning bullet to pool");
         Pool.Instance.ReturnBullet(this);
     }
 }

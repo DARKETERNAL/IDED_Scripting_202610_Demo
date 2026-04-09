@@ -30,9 +30,9 @@ public class Pool : MonoBehaviour
 
     public void ReturnBullet(Bullet bullet)
     {
-        bullet.ResetBullet(active: false);
         bullet.transform.SetParent(transform);
         bullet.transform.localPosition = Vector3.zero;
+        bullet.ResetBullet(active: false);
         bullets.Add(bullet);
     }
 

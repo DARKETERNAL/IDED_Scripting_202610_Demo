@@ -38,7 +38,7 @@ public class SpawnController : MonoBehaviour
     {
         if (spawnObjects.Length > 0 && IsThereAtLeastOneObjectToSpawn)
         {
-            InvokeRepeating("SpawnObject", firstSpawnDelay, spawnRate);
+            //InvokeRepeating("SpawnObject", firstSpawnDelay, spawnRate);
 
             if (Player.Instance != null)
             {
