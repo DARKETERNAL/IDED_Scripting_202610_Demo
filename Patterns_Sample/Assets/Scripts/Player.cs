@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 
     private const float PLAYER_RADIUS = 0.4F;
 
+    private static Player instance;
+
     [Header("Movement")]
     [SerializeField]
     private float moveSpeed = 1F;
@@ -66,6 +68,20 @@ public class Player : MonoBehaviour
     #endregion MovementProperties
 
     public Action OnPlayerDied;
+
+    public static Player Instance => instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     private void Start()

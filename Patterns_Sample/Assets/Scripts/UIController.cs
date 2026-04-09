@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    private Player playerRef;
-
     [SerializeField]
     private Image[] lifeImages;
 
@@ -28,9 +26,7 @@ public class UIController : MonoBehaviour
     {
         ToggleRestartButton(false);
 
-        playerRef = FindObjectOfType<Player>();
-
-        if (playerRef != null && lifeImages.Length == Player.PLAYER_LIVES)
+        if (Player.Instance != null && lifeImages.Length == Player.PLAYER_LIVES)
         {
             InvokeRepeating("UpdateUI", 0F, tickRate);
         }
@@ -50,16 +46,16 @@ public class UIController : MonoBehaviour
         {
             if (lifeImages[i] != null && lifeImages[i].enabled)
             {
-                lifeImages[i].gameObject.SetActive(playerRef.Lives >= i + 1);
+                lifeImages[i].gameObject.SetActive(Player.Instance.Lives >= i + 1);
             }
         }
 
         if (scoreLabel != null)
         {
-            scoreLabel.text = playerRef.Score.ToString();
+            scoreLabel.text = Player.Instance.Score.ToString();
         }
 
-        if (playerRef.Lives <= 0)
+        if (Player.Instance.Lives <= 0)
         {
             CancelInvoke();
 

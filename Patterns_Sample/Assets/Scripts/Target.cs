@@ -31,11 +31,9 @@ public class Target : MonoBehaviour
 
             if (currentHP <= 0)
             {
-                Player player = FindObjectOfType<Player>();
-
-                if (player != null)
+                if (Player.Instance != null)
                 {
-                    player.Score += scoreAdd;
+                    Player.Instance.Score += scoreAdd;
                 }
 
                 Destroy(gameObject);
@@ -44,15 +42,13 @@ public class Target : MonoBehaviour
         else if (collidedObjectLayer.Equals(Utils.PlayerLayer) ||
             collidedObjectLayer.Equals(Utils.KillVolumeLayer))
         {
-            Player player = FindObjectOfType<Player>();
-
-            if (player != null)
+            if (Player.Instance != null)
             {
-                player.Lives -= 1;
+                Player.Instance.Lives -= 1;
 
-                if (player.Lives <= 0 && player.OnPlayerDied != null)
+                if (Player.Instance.Lives <= 0 && Player.Instance.OnPlayerDied != null)
                 {
-                    player.OnPlayerDied();
+                    Player.Instance.OnPlayerDied();
                 }
             }
 

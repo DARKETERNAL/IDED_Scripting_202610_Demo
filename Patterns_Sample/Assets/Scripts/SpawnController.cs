@@ -11,9 +11,6 @@ public class SpawnController : MonoBehaviour
     [SerializeField]
     private float firstSpawnDelay = 0f;
 
-    [SerializeField]
-    private Player player;
-
     private Vector3 spawnPoint;
 
     private bool IsThereAtLeastOneObjectToSpawn
@@ -43,9 +40,9 @@ public class SpawnController : MonoBehaviour
         {
             InvokeRepeating("SpawnObject", firstSpawnDelay, spawnRate);
 
-            if (player != null)
+            if (Player.Instance != null)
             {
-                player.OnPlayerDied += StopSpawning;
+                Player.Instance.OnPlayerDied += StopSpawning;
             }
         }
     }
