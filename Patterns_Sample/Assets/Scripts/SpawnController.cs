@@ -11,6 +11,9 @@ public class SpawnController : MonoBehaviour
     [SerializeField]
     private float firstSpawnDelay = 0f;
 
+    [SerializeField]
+    private bool spawnSingleObject = false;
+
     private Vector3 spawnPoint;
 
     private bool IsThereAtLeastOneObjectToSpawn
@@ -49,7 +52,20 @@ public class SpawnController : MonoBehaviour
 
     private void SpawnObject()
     {
-        GameObject spawnGO = spawnObjects[Random.Range(0, spawnObjects.Length)];
+        //GameObject spawnGO = spawnSingleObject ? // ?:
+        //    spawnObjects[0] :
+        //    spawnObjects[Random.Range(0, spawnObjects.Length)];
+
+        GameObject spawnGO;
+
+        if (spawnSingleObject)
+        {
+            spawnGO = spawnObjects[0];
+        }
+        else
+        {
+            spawnGO = spawnObjects[Random.Range(0, spawnObjects.Length)];
+        }
 
         if (spawnGO != null)
         {
