@@ -120,8 +120,10 @@ public class Player : MonoBehaviour
                 //   (bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation)
                 //   .AddForce(transform.up * bulletSpeed, ForceMode.Impulse);
 
-                Pool.Instance.GetBullet().Rigidbody
-                    .AddForce(transform.up * bulletSpeed, ForceMode.Impulse);
+                Bullet bullet = Pool.Instance.GetBullet();
+                bullet.transform.position = bulletSpawnPoint.position;
+                bullet.transform.rotation = bulletSpawnPoint.rotation;
+                bullet.Rigidbody.AddForce(transform.up * bulletSpeed, ForceMode.Impulse);
             }
         }
     }
