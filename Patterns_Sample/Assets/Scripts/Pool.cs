@@ -59,7 +59,8 @@ public class Pool : MonoBehaviour
 
     private void AddBulletToPool()
     {
-        Bullet bullet = Instantiate(bulletBase, transform);
+        Bullet bullet = BulletFactory.Instance.CreateInstance();
+        bullet.transform.SetParent(transform);
         ReturnBullet(bullet);
     }
 }

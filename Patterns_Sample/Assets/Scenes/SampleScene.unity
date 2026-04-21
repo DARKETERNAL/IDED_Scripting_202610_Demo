@@ -1387,6 +1387,69 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842818818}
   m_CullTransparentMesh: 0
+--- !u!1 &911879817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 911879819}
+  - component: {fileID: 911879818}
+  - component: {fileID: 911879820}
+  m_Layer: 0
+  m_Name: Factories
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &911879818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911879817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d242ce3de9b93e43ba6f0e803ca5cd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TargetFactory
+  spawnObjects:
+  - {fileID: 2627135051368097642, guid: b5f0d6b4e9ba9704a9e36c5bac0a930b, type: 3}
+  - {fileID: 2627135051368097642, guid: 66c2fad4b964999488879a54fc3c5564, type: 3}
+  - {fileID: 2627135051368097642, guid: a57facc0ab4ba144e8a7de39761c5d6e, type: 3}
+--- !u!4 &911879819
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911879817}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.04346, y: -8.56, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &911879820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911879817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dffd174f0f428f943a3a0247ca83c7b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BulletFactory
+  spawnObjects:
+  - {fileID: 4259895327710280015, guid: 659cbe9196140434f8585826b82346ba, type: 3}
 --- !u!1 &1134325180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,13 +1479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269aa7073773a23408cce0f4eb61f0d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObjects:
-  - {fileID: 2627135051368097643, guid: b5f0d6b4e9ba9704a9e36c5bac0a930b, type: 3}
-  - {fileID: 2627135051368097643, guid: 66c2fad4b964999488879a54fc3c5564, type: 3}
-  - {fileID: 2627135051368097643, guid: a57facc0ab4ba144e8a7de39761c5d6e, type: 3}
   spawnRate: 1.25
   firstSpawnDelay: 0
-  spawnSingleObject: 0
 --- !u!4 &1134325182
 Transform:
   m_ObjectHideFlags: 0
@@ -1732,3 +1790,4 @@ SceneRoots:
   - {fileID: 780343330}
   - {fileID: 1134325182}
   - {fileID: 148556494}
+  - {fileID: 911879819}

@@ -3,43 +3,17 @@
 public class SpawnController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] spawnObjects;
-
-    [SerializeField]
     private float spawnRate = 1f;
 
     [SerializeField]
     private float firstSpawnDelay = 0f;
 
-    [SerializeField]
-    private bool spawnSingleObject = false;
-
     private Vector3 spawnPoint;
-
-    private bool IsThereAtLeastOneObjectToSpawn
-    {
-        get
-        {
-            bool result = false;
-
-            for (int i = 0; i < spawnObjects.Length; i++)
-            {
-                result = spawnObjects[i] != null;
-
-                if (result)
-                {
-                    break;
-                }
-            }
-
-            return result;
-        }
-    }
 
     // Start is called before the first frame update
     private void Start()
     {
-        if (spawnObjects.Length > 0 && IsThereAtLeastOneObjectToSpawn)
+        if (TargetFactory.Instance != null)
         {
             InvokeRepeating("SpawnObject", firstSpawnDelay, spawnRate);
 
@@ -52,27 +26,15 @@ public class SpawnController : MonoBehaviour
 
     private void SpawnObject()
     {
-        //GameObject spawnGO = spawnSingleObject ? // ?:
-        //    spawnObjects[0] :
-        //    spawnObjects[Random.Range(0, spawnObjects.Length)];
-
-        GameObject spawnGO;
-
-        if (spawnSingleObject)
-        {
-            spawnGO = spawnObjects[0];
-        }
-        else
-        {
-            spawnGO = spawnObjects[Random.Range(0, spawnObjects.Length)];
-        }
+        GameObject spawnGO = TargetFactory.Instance.CreateInstance().gameObject;
 
         if (spawnGO != null)
         {
             spawnPoint = Camera.main.ViewportToWorldPoint(new Vector3(
                 Random.Range(0F, 1F), 1F, transform.position.z));
 
-            GameObject instance = Instantiate(spawnGO, spawnPoint, Quaternion.identity);
+            spawnGO.transform.position = spawnPoint;
+            spawnGO.transform.rotation = Quaternion.identity;
         }
     }
 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class Target : MonoBehaviour
+public class Target : MonoBehaviour, IFactoryProduct
 {
     private const float TIME_TO_DESTROY = 10F;
 
