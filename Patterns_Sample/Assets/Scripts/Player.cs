@@ -116,10 +116,6 @@ public class Player : MonoBehaviour
             if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
                 && CanShoot)
             {
-                //Instantiate<Rigidbody>
-                //   (bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation)
-                //   .AddForce(transform.up * bulletSpeed, ForceMode.Impulse);
-
                 Bullet bullet = Pool.Instance.GetBullet();
                 bullet.transform.position = bulletSpawnPoint.position;
                 bullet.transform.rotation = bulletSpawnPoint.rotation;
