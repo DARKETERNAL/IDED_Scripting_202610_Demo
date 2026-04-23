@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     private ShootCommand shootCommand;
 
     public Action OnPlayerDied;
+    public Action OnPlayerHit;
 
     public static Player Instance => instance;
 
@@ -48,10 +49,35 @@ public class Player : MonoBehaviour
     {
         Lives = PLAYER_LIVES;
 
+        OnPlayerHit += PlayerHit;
         OnPlayerDied += PlayerDied;
+        Target.onTargetDestroyed += AddScore;
 
         movementCommand = gameObject.GetComponent<MovementCommand>();
         shootCommand = gameObject.GetComponent<ShootCommand>();
+    }
+
+    private void PlayerHit()
+    {
+        Lives -= 1;
+
+        if (Lives <= 0 && OnPlayerDied != null)
+        {
+            OnPlayerDied();
+        }
+    }
+
+    private void AddScore(int scoreAdd) => Score += scoreAdd;
+
+    private void PlayerDied()
+    {
+        //OnPlayerDied -= PlayerDied;
+        OnPlayerDied = null;
+        OnPlayerHit = null;
+        Target.onTargetDestroyed -= AddScore;
+
+        this.enabled = false;
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -72,14 +98,5 @@ public class Player : MonoBehaviour
         {
             shootCommand?.Execute();
         }
-    }
-
-    private void PlayerDied()
-    {
-        //OnPlayerDied -= PlayerDied;
-        OnPlayerDied = null;
-
-        this.enabled = false;
-        gameObject.SetActive(false);
     }
 }

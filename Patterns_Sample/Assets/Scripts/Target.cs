@@ -13,6 +13,10 @@ public class Target : MonoBehaviour, IFactoryProduct
     [SerializeField]
     private int scoreAdd = 10;
 
+    public delegate void OnTargetDestroyed(int scoreAdd);
+
+    public static event OnTargetDestroyed onTargetDestroyed;
+
     private void Start()
     {
         currentHP = maxHP;
@@ -31,27 +35,14 @@ public class Target : MonoBehaviour, IFactoryProduct
 
             if (currentHP <= 0)
             {
-                if (Player.Instance != null)
-                {
-                    Player.Instance.Score += scoreAdd;
-                }
-
+                onTargetDestroyed?.Invoke(scoreAdd);
                 Destroy(gameObject);
             }
         }
         else if (collidedObjectLayer.Equals(Utils.PlayerLayer) ||
             collidedObjectLayer.Equals(Utils.KillVolumeLayer))
         {
-            if (Player.Instance != null)
-            {
-                Player.Instance.Lives -= 1;
-
-                if (Player.Instance.Lives <= 0 && Player.Instance.OnPlayerDied != null)
-                {
-                    Player.Instance.OnPlayerDied();
-                }
-            }
-
+            Player.Instance.OnPlayerHit?.Invoke();
             Destroy(gameObject);
         }
     }
