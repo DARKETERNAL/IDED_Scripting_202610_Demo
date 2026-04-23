@@ -48,6 +48,8 @@ public class Player : MonoBehaviour
     {
         Lives = PLAYER_LIVES;
 
+        OnPlayerDied += PlayerDied;
+
         movementCommand = gameObject.GetComponent<MovementCommand>();
         shootCommand = gameObject.GetComponent<ShootCommand>();
     }
@@ -55,28 +57,29 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Lives <= 0)
-        {
-            this.enabled = false;
-            gameObject.SetActive(false);
-        }
-        else
-        {
-            HVal = Input.GetAxis("Horizontal");
+        HVal = Input.GetAxis("Horizontal");
 
-            if (HVal != 0F)
-            {
-                //if (movementCommand != null)
-                //{
-                //    movementCommand.Execute();
-                //}
-                movementCommand?.Execute();
-            }
-
-            if (Input.GetButtonDown("Fire1"))
-            {
-                shootCommand?.Execute();
-            }
+        if (HVal != 0F)
+        {
+            //if (movementCommand != null)
+            //{
+            //    movementCommand.Execute();
+            //}
+            movementCommand?.Execute();
         }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            shootCommand?.Execute();
+        }
+    }
+
+    private void PlayerDied()
+    {
+        //OnPlayerDied -= PlayerDied;
+        OnPlayerDied = null;
+
+        this.enabled = false;
+        gameObject.SetActive(false);
     }
 }

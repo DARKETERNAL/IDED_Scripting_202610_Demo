@@ -38,8 +38,5 @@ public class SpawnController : MonoBehaviour
         }
     }
 
-    private void StopSpawning()
-    {
-        CancelInvoke();
-    }
+    private void StopSpawning() => CancelInvoke();
 }
