@@ -6,66 +6,26 @@ public class Player : MonoBehaviour
 {
     public const int PLAYER_LIVES = 3;
 
-    private const float PLAYER_RADIUS = 0.4F;
+    public const float PLAYER_RADIUS = 0.4F;
 
     private static Player instance;
 
-    [Header("Movement")]
-    [SerializeField]
-    private float moveSpeed = 1F;
-
-    private float hVal;
-
-    #region Bullet
-
-    [Header("Bullet")]
-    [SerializeField]
-    private Rigidbody bullet;
+    #region StatsProperties
 
     [SerializeField]
     private Transform bulletSpawnPoint;
 
-    [SerializeField]
-    private float bulletSpeed = 3F;
-
-    #endregion Bullet
-
-    #region BoundsReferences
-
-    private float referencePointComponent;
-    private float leftCameraBound;
-    private float rightCameraBound;
-
-    #endregion BoundsReferences
-
-    #region StatsProperties
-
     public int Score { get; set; }
     public int Lives { get; set; }
 
+    public float HVal { get; private set; }
+
+    public Transform BulletSpawnPoint => bulletSpawnPoint;
+
     #endregion StatsProperties
 
-    #region MovementProperties
-
-    public bool ShouldMove
-    {
-        get =>
-            (hVal != 0F && InsideCamera) ||
-            (hVal > 0F && ReachedLeftBound) ||
-            (hVal < 0F && ReachedRightBound);
-    }
-
-    private bool InsideCamera
-    {
-        get => !ReachedRightBound && !ReachedLeftBound;
-    }
-
-    private bool ReachedRightBound { get => referencePointComponent >= rightCameraBound; }
-    private bool ReachedLeftBound { get => referencePointComponent <= leftCameraBound; }
-
-    private bool CanShoot { get => bulletSpawnPoint != null && bullet != null; }
-
-    #endregion MovementProperties
+    private MovementCommand movementCommand;
+    private ShootCommand shootCommand;
 
     public Action OnPlayerDied;
 
@@ -86,13 +46,10 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        leftCameraBound = Camera.main.ViewportToWorldPoint(new Vector3(
-            0F, 0F, 0F)).x + PLAYER_RADIUS;
-
-        rightCameraBound = Camera.main.ViewportToWorldPoint(new Vector3(
-            1F, 0F, 0F)).x - PLAYER_RADIUS;
-
         Lives = PLAYER_LIVES;
+
+        movementCommand = gameObject.GetComponent<MovementCommand>();
+        shootCommand = gameObject.GetComponent<ShootCommand>();
     }
 
     // Update is called once per frame
@@ -105,21 +62,20 @@ public class Player : MonoBehaviour
         }
         else
         {
-            hVal = Input.GetAxis("Horizontal");
+            HVal = Input.GetAxis("Horizontal");
 
-            if (ShouldMove)
+            if (HVal != 0F)
             {
-                transform.Translate(transform.right * hVal * moveSpeed * Time.deltaTime);
-                referencePointComponent = transform.position.x;
+                //if (movementCommand != null)
+                //{
+                //    movementCommand.Execute();
+                //}
+                movementCommand?.Execute();
             }
 
-            if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-                && CanShoot)
+            if (Input.GetButtonDown("Fire1"))
             {
-                Bullet bullet = Pool.Instance.GetBullet();
-                bullet.transform.position = bulletSpawnPoint.position;
-                bullet.transform.rotation = bulletSpawnPoint.rotation;
-                bullet.Rigidbody.AddForce(transform.up * bulletSpeed, ForceMode.Impulse);
+                shootCommand?.Execute();
             }
         }
     }
